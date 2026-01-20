@@ -1,13 +1,13 @@
-# .NET Proxy Demo (Loop)
+# Node.js Proxy Demo (Loop)
 
-This demo shows how a .NET application sends LLM requests through a Loop Proxy so that all traffic is captured and visible in Loop.
+This demo shows how a Node.js application sends LLM requests through a Loop Proxy so that all traffic is captured and visible in Loop.
 
 The demo is intentionally minimal and meant for learning and experimentation.  
 It is not intended for production use.
 
 ## What this demo does
 
-- Sends chat requests from a .NET application
+- Sends chat requests from a Node.js application
 - Routes all requests through a Loop Proxy
 - The proxy forwards requests to the LLM provider
 - Loop captures requests and responses
@@ -15,14 +15,14 @@ It is not intended for production use.
 **High-level flow**
 
 ```
-.NET application → Loop Proxy → LLM provider
+Node.js application → Loop Proxy → LLM provider
 ```
 
 All captured traffic is visible in Loop.
 
 ## Requirements
 
-- .NET SDK 8.0 or newer
+- Node.js version 18 or newer
 - Loop Proxy running locally or remotely
 - Network access to the LLM provider
 
@@ -31,10 +31,8 @@ All captured traffic is visible in Loop.
 ```
 proxy
 ├── README.md
-└── src
-    └── Loop.Demos.DotNet.ProxyClient
-        ├── Loop.Demos.DotNet.ProxyClient.csproj
-        └── Program.cs
+├── index.js
+└── package.json
 ```
 
 ## Configuration
@@ -58,10 +56,10 @@ Default value: `gpt-4o`
 
 ## Running the demo
 
-### Step 1: Restore dependencies (run once)
+### Step 1: Install dependencies (run once)
 
 ```bash
-dotnet restore
+npm install
 ```
 
 ### Step 2: Set environment variables
@@ -85,7 +83,7 @@ export OPENAI_MODEL=gpt-4o
 ### Step 3: Run the demo
 
 ```bash
-dotnet run --project src/Loop.Demos.DotNet.ProxyClient
+node index.js
 ```
 
 You can now type questions into the terminal.  
@@ -101,5 +99,5 @@ Type `exit` to quit.
 
 ## Related demos
 
-- `demos/node/proxy`
+- `demos/dotnet/proxy`
 - `demos/python/proxy`
