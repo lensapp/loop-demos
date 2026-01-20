@@ -2,5 +2,13 @@
 **/bin/
 **/obj/
 
-# Visual Studio
+# Visual Studio (root and nested)
 .vs/
+**/.vs/
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Debug profiles (can contain environment variables / secrets)
+**/Properties/launchSettings.json
