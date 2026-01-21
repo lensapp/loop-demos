@@ -1,70 +1,69 @@
-# Python Proxy Demo (Loop)
+# 🐍 Python Proxy Demo
 
-This demo shows how a Python application sends LLM requests through a Loop Proxy so that all traffic is captured and visible in Loop.
+> Capture LLM traffic from a Python application using **Loop Proxy**.
 
-The demo is intentionally minimal and meant for learning and experimentation.  
-It is not intended for production use.
+This demo shows how to route OpenAI requests through Loop Proxy for full observability. It's intentionally minimal — designed for learning and experimentation, not production use.
 
-## What this demo does
+---
 
-- Sends chat requests from a Python application
-- Routes all requests through a Loop Proxy
-- The proxy forwards requests to the LLM provider
-- Loop captures requests and responses
+## 🎯 What This Demo Does
 
-**High-level flow**
+1. Sends chat requests from a Python application
+2. Routes all requests through Loop Proxy
+3. Proxy forwards requests to OpenAI
+4. **Loop captures everything** — requests, responses, latency, tokens
 
-```
-Python application → Loop Proxy → LLM provider
-```
+---
 
-All captured traffic is visible in Loop.
+## 📋 Requirements
 
-## Requirements
+| Requirement | Details |
+|-------------|---------|
+| Python | 3.8 or newer |
+| Loop Proxy | Running locally or remotely |
+| Network | Access to LLM provider |
 
-- Python version 3.8 or newer
-- Loop Proxy running locally or remotely
-- Network access to the LLM provider
+---
 
-## Project structure
+## 📁 Project Structure
 
-```
-proxy
-├── README.md
-├── main.py
-└── requirements.txt
-```
+| File | Description |
+|------|-------------|
+| `main.py` | Demo application entry point |
+| `requirements.txt` | Python dependencies |
+| `README.md` | This file |
 
-## Configuration
+---
 
-This demo uses environment variables.
+## ⚙️ Configuration
 
 ### Required
 
-**OPENAI_API_KEY**  
-API key for the LLM provider.
+| Variable | Description |
+|----------|-------------|
+| `OPENAI_API_KEY` | API key for OpenAI |
 
 ### Optional
 
-**LOOP_PROXY_BASE_URL**  
-Base URL of the Loop Proxy.  
-Default value: `http://localhost:31300/openai`
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `LOOP_PROXY_BASE_URL` | `http://localhost:31300/openai` | Loop Proxy endpoint |
+| `OPENAI_MODEL` | `gpt-4o` | Model to use |
 
-**OPENAI_MODEL**  
-LLM model name.  
-Default value: `gpt-4o`
+---
 
-## Running the demo
+## 🚀 Quick Start
 
-### Step 1: Install dependencies (run once)
+### 1️⃣ Install dependencies (run once)
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step 2: Set environment variables
+### 2️⃣ Set environment variables
 
-**Windows PowerShell**
+<details>
+<summary><b>Windows PowerShell</b></summary>
 
 ```powershell
 $env:OPENAI_API_KEY="sk-..."
@@ -72,7 +71,10 @@ $env:LOOP_PROXY_BASE_URL="http://localhost:31300/openai"
 $env:OPENAI_MODEL="gpt-4o"
 ```
 
-**macOS or Linux**
+</details>
+
+<details>
+<summary><b>macOS / Linux</b></summary>
 
 ```bash
 export OPENAI_API_KEY=sk-...
@@ -80,7 +82,9 @@ export LOOP_PROXY_BASE_URL=http://localhost:31300/openai
 export OPENAI_MODEL=gpt-4o
 ```
 
-### Step 3: Run the demo
+</details>
+
+### 3️⃣ Run the demo
 
 ```bash
 python main.py
@@ -90,14 +94,39 @@ You can now type questions into the terminal.
 Responses will be printed and captured by Loop.  
 Type `exit` to quit.
 
-## Notes
+### 4️⃣ Verify it works
 
-- This demo uses plain HTTP requests
-- No OpenTelemetry instrumentation
-- No SDK-specific abstractions
-- API keys must never be committed to Git
+- ✅ Type a question in the terminal
+- ✅ See the response printed
+- ✅ Check Loop Dashboard for captured traffic
+- Type `exit` to quit
 
-## Related demos
+---
 
-- `demos/dotnet/proxy`
-- `demos/node/proxy`
+## 💡 Notes
+
+> ⚠️ **Security:** Never commit API keys or `.env` files to Git.
+
+- Uses the official `openai` Python package
+- No OpenTelemetry instrumentation (see `../otel` for that approach)
+- No production-ready error handling
+
+---
+
+## 🔗 Related Demos
+
+| Language | Path |
+|----------|------|
+| .NET | [`demos/dotnet/proxy`](../../dotnet/proxy) |
+| Node.js | [`demos/node/proxy`](../../node/proxy) |
+
+---
+
+## 🆘 Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| `401 Unauthorized` | Check your `OPENAI_API_KEY` |
+| `Connection refused` | Ensure Loop Proxy is running |
+| `ModuleNotFoundError` | Run `pip install -r requirements.txt` |
+| `python: command not found` | Install Python 3.8+ or use `python3` |
